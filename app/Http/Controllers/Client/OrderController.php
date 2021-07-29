@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use \Illuminate\Contracts\Foundation\Application;
 use \Illuminate\Contracts\View\Factory;
 use \Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
@@ -19,6 +20,10 @@ class OrderController extends Controller
      */
     public function create(Ticket $ticket)
     {
+
+        $ticket = $ticket->leftJoin('installment_features', 'tickets.id', '=', 'installment_features.ticket_id')
+            ->orderBy(DB::raw('tickets.id'),'Desc')
+            ->first();
         return view('client.orderInfo', compact('ticket'));
     }
 

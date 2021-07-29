@@ -26,6 +26,7 @@
                  src="{{ $ticket->image }}">
         </div>
         <div class="col-8 right" style="float: right">
+            <h2> نام آگهی :{{ $ticket->title }} </h2>
             <div style="float: left;margin: 5px 10px">
                 <span style="float: left ;margin: 0 5px "> ویزگی ها : </span>
                 @foreach(unserialize($ticket->property) as $property)
