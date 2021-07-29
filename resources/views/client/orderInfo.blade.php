@@ -77,7 +77,7 @@
                 @csrf
                 <div class="form-group">
                     <label for="exampleInputUsername1">نوع پرداخت</label>
-                    <select class="form-control" id="exampleSelectGender" name="gender">
+                    <select class="form-control" id="exampleSelectGender" name="payMethod">
                         <option value="0">اقساطی</option>
                         <option value="1">نقدی</option>
                     </select>

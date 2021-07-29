@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use \Illuminate\Contracts\Foundation\Application;
 use \Illuminate\Contracts\View\Factory;
 use \Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
@@ -22,22 +23,32 @@ class OrderController extends Controller
     {
 
         $ticket = $ticket->leftJoin('installment_features', 'tickets.id', '=', 'installment_features.ticket_id')
-            ->orderBy(DB::raw('tickets.id'),'Desc')
+            ->orderBy(DB::raw('tickets.id'), 'Desc')
             ->first();
         return view('client.orderInfo', compact('ticket'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
+    /**
+     * save an order for user
+     * @param Request $request
+     * @param Ticket $ticket
+     */
+    public function store(Request $request, Ticket $ticket)
+    {
+        $totalAmount = $ticket->payMethod == 0 ? $ticket->priceInstallment : $ticket->priceCash;
+        $userInfo = serialize([
+            'name' => $request->input('name'),
+            'family' => $request->input('family'),
+            'nationalId' => $request->input('nationalId'),
+            'phone' => $request->input('phone'),
+            'gender' => $request->input('gender'),
+            'address' => $request->input('address'),
+            'email' => $request->input('email')
+        ]);
+        $ticketInfo = serialize($ticket);
+        $userId=Auth::id();
+    }
 
 
     /**
