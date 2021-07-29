@@ -108,7 +108,7 @@
                                     @endguest()
                                     @auth()
                                         <div style="float: left;margin: 5px 10px">
-                                            <a class="btn btn-success" href="{{ '/orderInfo/'.$childTicket->id }}">
+                                            <a class="btn btn-success" href="{{ '/order/info/'.$childTicket->id }}">
                                                 خرید محصول </a>
                                         </div>
                                     @endauth
@@ -181,7 +181,7 @@
                             @endguest()
                             @auth()
                                 <div style="float: left;margin: 5px 10px">
-                                    <a class="btn btn-success" href="{{ route('orderInfo',$ticket->id) }}">
+                                    <a class="btn btn-success" href="{{ route('Order.create',$ticket->id) }}">
                                         خرید محصول </a>
                                 </div>
                             @endauth

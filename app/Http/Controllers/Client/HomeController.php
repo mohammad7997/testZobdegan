@@ -17,9 +17,4 @@ class HomeController extends Controller
             ->get();
         return view('client.home',compact('tickets'));
     }
-
-    public function orderInfo(Ticket $ticket)
-    {
-        return view('client.orderInfo',compact('ticket'));
-    }
 }

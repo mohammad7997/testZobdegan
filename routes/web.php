@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\TicketController;
 use \App\Http\Controllers\Client\HomeController;
+use \App\Http\Controllers\Client\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,8 +19,11 @@ use \App\Http\Controllers\Client\HomeController;
 
 Auth::routes();
 
-Route::get('/',[HomeController::class,'index'])->name('index');
-Route::get('/orderInfo/{ticket}',[HomeController::class,'orderInfo'])->name('orderInfo');
+Route::get('/', [HomeController::class, 'index'])->name('index');
+Route::prefix('order/')->name('Order.')->group(function () {
+    Route::get('/info/{ticket}', [OrderController::class, 'create'])->name('create');
+    Route::get('/store/{ticket}', [OrderController::class, 'store'])->name('store');
+});
 
 
 Route::prefix('admin/')->name('Admin.')->group(function () {
@@ -40,7 +44,6 @@ Route::prefix('admin/')->name('Admin.')->group(function () {
     Route::get('childTicket/create/{ticket}', [TicketController::class, 'createChildTicket'])->name('createChildTicket');
     Route::get('childTicket/edit/{ticket}', [TicketController::class, 'editChildTicket'])->name('editChildTicket');
 });
-
 
 
 Auth::routes();
