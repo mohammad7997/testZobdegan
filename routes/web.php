@@ -19,6 +19,9 @@ use \App\Http\Controllers\Client\HomeController;
 Auth::routes();
 
 Route::get('/',[HomeController::class,'index'])->name('index');
+Route::get('/orderInfo/{ticket}',[HomeController::class,'orderInfo'])->name('orderInfo');
+
+
 Route::prefix('admin/')->name('Admin.')->group(function () {
 
     // route of own and group ticket
