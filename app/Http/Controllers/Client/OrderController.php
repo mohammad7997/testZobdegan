@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 use App\Models\Ticket;
 use App\Repository\OrderRipositpry;
 use Illuminate\Http\Request;
@@ -49,50 +50,25 @@ class OrderController extends Controller
             'email' => $request->input('email')
         ]);
         $ticketInfo = serialize($ticket);
-        $payMethod=$request->payMethod;
-        resolve(OrderRipositpry::class)->createOrder($totalAmount, $userInfo, $ticketInfo, $payMethod,$ticket);
+        $payMethod = $request->payMethod;
+        resolve(OrderRipositpry::class)->createOrder($totalAmount, $userInfo, $ticketInfo, $payMethod, $ticket);
     }
 
     public function verify(Request $request)
     {
-        if ($request->has('Authority')){
-            if ($request->Status == 'OK'){
-                resolve(OrderRipositpry::class)->verify($request->Authority);
+        if ($request->has('Authority')) {
+            if ($request->Status == 'OK') {
+                $order = resolve(OrderRipositpry::class)->verify($request->Authority);
+                return redirect(route('Order.factor', $order));
+            } else {
+                $msg = 'پرداخت ناموفق ';
+                return redirect(route('index'))->with('failed', $msg);
             }
         }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function factor(Order $order)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        return view('client.factor', compact('order'));
     }
 }

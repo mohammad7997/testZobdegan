@@ -17,7 +17,7 @@
 </head>
 <body>
 
-
+@include('admin.layout.message')
 <div class="accordion accordion-flush" id="accordionFlushExample">
     @foreach($tickets as $ticket)
         @if($ticket->parent == 0 && $ticket->type == 1)

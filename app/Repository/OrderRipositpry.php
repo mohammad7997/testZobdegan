@@ -6,7 +6,8 @@ namespace App\Repository;
 use App\Models\Order;
 use Illuminate\Support\Facades\Auth;
 use Zarinpal\Laravel\Facade\Zarinpal;
-
+use \Illuminate\Database\Eloquent\Builder;
+use \Illuminate\Database\Eloquent\Model;
 class OrderRipositpry
 {
     public $authority;
@@ -69,6 +70,7 @@ class OrderRipositpry
      * payStatus = 0 => not pay
      * payStatus = 1 => pay
      * payStatus = 2 => installment pay
+     * @return Builder|Model|object|null
      */
     public function verify($Authority)
     {
@@ -82,5 +84,6 @@ class OrderRipositpry
                 'payStatus'=> 1
             ]);
         }
+        return $order;
     }
 }
