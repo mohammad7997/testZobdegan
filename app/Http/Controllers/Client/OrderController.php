@@ -56,7 +56,9 @@ class OrderController extends Controller
     public function verify(Request $request)
     {
         if ($request->has('Authority')){
-            dd($request->Authority);
+            if ($request->Status == 'OK'){
+                resolve(OrderRipositpry::class)->verify($request->Authority);
+            }
         }
     }
 

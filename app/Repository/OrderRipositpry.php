@@ -60,4 +60,27 @@ class OrderRipositpry
         $this->zarinpal();
         $verifyZarinpal = Zarinpal::verify('OK', $totalAmount, $this->authority);
     }
+
+    /**
+     * verify authority and update order
+     * payMethod = 0 => installment
+     * payMethod = 1 => cash
+     * @param $Authority
+     * payStatus = 0 => not pay
+     * payStatus = 1 => pay
+     * payStatus = 2 => installment pay
+     */
+    public function verify($Authority)
+    {
+        $order=Order::query()->where('authority',$Authority)->first();
+        if ($order->payMethod == 0){
+            $order->update([
+               'payStatus'=> 2
+            ]);
+        }else{
+            $order->update([
+                'payStatus'=> 1
+            ]);
+        }
+    }
 }
