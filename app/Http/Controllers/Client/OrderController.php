@@ -56,7 +56,7 @@ class OrderController extends Controller
     public function verify(Request $request)
     {
         if ($request->has('Authority')){
-            dd($request->has('Authority'));
+            dd($request->Authority);
         }
     }
 
