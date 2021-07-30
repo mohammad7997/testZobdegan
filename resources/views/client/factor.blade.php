@@ -16,56 +16,39 @@
             crossorigin="anonymous"></script>
 </head>
 <body>
-
-{{ dd($order) }}
-<div class="accordion accordion-flush" id="accordionFlushExample">
-    <h2 style="text-align: center">اطلاعات سفارش</h2>
-    <div class="row" style="border: 1px solid #888f91">
-        <div class="col-4 left" style="float: left">
-            <img style="width: 70%;height: 100px"
-                 src="{{ $ticket->image }}">
-        </div>
-        <div class="col-8 right" style="float: right">
-            <h2> نام آگهی :{{ $ticket->title }} </h2>
-            <div style="float: left;margin: 5px 10px">
-                <span style="float: left ;margin: 0 5px "> ویزگی ها : </span>
-                @foreach(unserialize($ticket->property) as $property)
-                    {{ $property }},
-                @endforeach
-            </div>
-
-            <div style="float: left;margin: 5px 10px">
-                <span style="float: left ;margin: 0 5px "> توضیح : </span>
-                {{ $ticket->description }}
-            </div>
-
-            <div style="float: left;margin: 5px 10px">
-                <span style="float: left ;margin: 0 5px "> قیمت نقدی : </span>
-                {{ $ticket->priceCash }}
-            </div>
-
-            <h4 style="float: left;width: 100%">شرایط اقساطی</h4>
-
-            <div style="float: left;margin: 5px 10px">
-                <span style="float: left ;margin: 0 5px "> قیمت اقساطی : </span>
-                {{ $ticket->priceInstallment }}
-            </div>
-
-            <div style="float: left;margin: 5px 10px">
-                <span style="float: left ;margin: 0 5px "> پیش پرداخت : </span>
-                {{ $ticket->prepayment }}
-            </div>
-
-            <div style="float: left;margin: 5px 10px">
-                <span style="float: left ;margin: 0 5px "> مدت زمان اقساط : </span>
-                {{ $ticket->installmentTime }}
-            </div>
-
-            <div style="float: left;margin: 5px 10px">
-                <span style="float: left ;margin: 0 5px "> تعداد اقساط : </span>
-                {{ $ticket->installmentNum }}
-            </div>
-        </div>
+<div class="container">
+    <div class="row col-6" style="margin: 60px auto">
+        <style>
+            tr{
+                border: 1px solid #000;
+                text-align: center;
+            }
+        </style>
+        <table class="table ">
+            <tbody>
+            <tr>
+                <td>
+                    src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+                    integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+                    crossorigin="anonymous"
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+                    integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+                    crossorigin="anonymous"
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+                    integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+                    crossorigin="anonymous"
+                </td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 </div>
 </body>

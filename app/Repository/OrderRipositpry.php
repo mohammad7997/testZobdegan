@@ -4,10 +4,12 @@
 namespace App\Repository;
 
 use App\Models\Order;
+use App\Models\Ticket;
 use Illuminate\Support\Facades\Auth;
 use Zarinpal\Laravel\Facade\Zarinpal;
 use \Illuminate\Database\Eloquent\Builder;
 use \Illuminate\Database\Eloquent\Model;
+
 class OrderRipositpry
 {
     public $authority;
@@ -20,18 +22,6 @@ class OrderRipositpry
             'testing',                             //required
             'me@example.com',                      //optional
             '09000000000'                        //optional
-        /*[                          //optional
-            "Wages" => [
-                "zp.1.1" => [
-                    "Amount" => 120,
-                    "Description" => "part 1"
-                ],
-                "zp.2.5" => [
-                    "Amount" => 60,
-                    "Description" => "part 2"
-                ]
-            ]
-        ]*/
         );
 
         $this->authority = $results['Authority'];
@@ -40,15 +30,12 @@ class OrderRipositpry
     public function zarinpal()
     {
         Zarinpal::redirect(); // redirect user to zarinpal
-// after that verify transaction by that $results['Authority']
-        // dd( Zarinpal::verify('OK', 1000, $results['Authority']));
     }
 
-    public function createOrder($totalAmount, $userInfo, $ticketInfo, $payMethod)
+    public function createOrder($totalAmount, $userInfo, $ticketInfo, $payMethod,Ticket $ticket)
     {
-        $this->getAuthority($totalAmount);
-        //dd($this->authority);
-        // dd($this->authority);
+        $amount = $ticket->payMethod == 0 ? $ticket->InstallmentFeature()->first()->prepayment : $ticket->priceCash;
+        $this->getAuthority($amount);
         Order::create([
             'authority' => $this->authority,
             'totalAmount' => $totalAmount,
@@ -74,14 +61,29 @@ class OrderRipositpry
      */
     public function verify($Authority)
     {
-        $order=Order::query()->where('authority',$Authority)->first();
-        if ($order->payMethod == 0){
+        $order = Order::query()->where('authority', $Authority)->first();
+        if ($order->payMethod == 0) {
             $order->update([
-               'payStatus'=> 2
+                'payStatus' => 2
             ]);
-        }else{
+
+            $time = strtotime($order->create_at);
+            $ticketInfo = unserialize($order->ticketInfo);
+           //    dd($ticketInfo->InstallmentFeature()->first()->prepayment);
+            $InstallmentTime = ($ticketInfo->installmentTime) * 30 * 24 * 60 * 60;
+            $nextInstallmentTime = date('Y-M-d', $InstallmentTime + $time);
+
+            $order->installmentPay()->create([
+                'totalAmount' => $order->totalAmount,
+                'prepayment' => $ticketInfo->InstallmentFeature()->first()->prepayment,
+                'installmentPay' => $ticketInfo->priceInstallment / $ticketInfo->InstallmentFeature()->first()->installmentNum,
+                'installmentNum' => $ticketInfo->InstallmentFeature()->first()->installmentNum,
+                'timeOfInstallment' => $nextInstallmentTime,
+            ]);
+
+        } else {
             $order->update([
-                'payStatus'=> 1
+                'payStatus' => 1
             ]);
         }
         return $order;
