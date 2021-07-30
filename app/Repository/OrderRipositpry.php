@@ -67,17 +67,21 @@ class OrderRipositpry
                 'payStatus' => 2
             ]);
 
-            $time = strtotime($order->create_at);
+            $time=strtotime(now());
             $ticketInfo = unserialize($order->ticketInfo);
            //    dd($ticketInfo->InstallmentFeature()->first()->prepayment);
             $InstallmentTime = ($ticketInfo->installmentTime) * 30 * 24 * 60 * 60;
-            $nextInstallmentTime = date('Y-M-d', $InstallmentTime + $time);
+            $nextInstallmentTime=$time+$InstallmentTime;
+           // dd(date('Y-m-d',$nextInstallmentTime));
+            $nextInstallmentTime = date('Y-m-d', $nextInstallmentTime);
+
+            $InstallmentFeature=$ticketInfo->InstallmentFeature()->first();
 
             $order->installmentPay()->create([
                 'totalAmount' => $order->totalAmount,
-                'prepayment' => $ticketInfo->InstallmentFeature()->first()->prepayment,
-                'installmentPay' => $ticketInfo->priceInstallment / $ticketInfo->InstallmentFeature()->first()->installmentNum,
-                'installmentNum' => $ticketInfo->InstallmentFeature()->first()->installmentNum,
+                'prepayment' => $InstallmentFeature->prepayment,
+                'installmentPay' => $ticketInfo->priceInstallment / $InstallmentFeature->installmentNum,
+                'installmentNum' => $InstallmentFeature->installmentNum,
                 'timeOfInstallment' => $nextInstallmentTime,
             ]);
 

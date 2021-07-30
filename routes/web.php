@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\TicketController;
 use \App\Http\Controllers\Client\HomeController;
 use \App\Http\Controllers\Client\OrderController;
+use \App\Http\Controllers\Client\panelController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +21,7 @@ use \App\Http\Controllers\Client\OrderController;
 Auth::routes();
 
 Route::get('/', [HomeController::class, 'index'])->name('index');
+
 Route::prefix('order/')->name('Order.')->group(function () {
     Route::get('/info/{ticket}', [OrderController::class, 'create'])->name('create');
     Route::post('/store/{ticket}', [OrderController::class, 'store'])->name('store');
@@ -27,6 +29,9 @@ Route::prefix('order/')->name('Order.')->group(function () {
     Route::get('factor/{order}', [OrderController::class, 'factor'])->name('factor');
 });
 
+Route::prefix('panel/')->name('Panel.')->group(function () {
+    Route::get('/index ', [panelController::class, 'index'])->name('index');
+});
 
 Route::prefix('admin/')->name('Admin.')->group(function () {
 
