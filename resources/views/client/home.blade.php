@@ -17,160 +17,85 @@
 </head>
 <body>
 
-
 <div class="accordion accordion-flush" id="accordionFlushExample">
-    @foreach($tickets as $ticket)
-        @if($ticket->parent == 0 && $ticket->type == 1)
-            <div class="accordion-item">
-                <h3>
-                    (گروهی)
-                    {{ $ticket->title }}
-                </h3>
-                <div class="accordion-header" id="{{ $ticket->id }}">
-                    <div class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                         data-bs-target="#flush-{{ $ticket->id }}" aria-expanded="false"
-                         aria-controls="flush-{{ $ticket->id }}">
-                        <div class="col-4 left">
-                            <img style="width: 70%;height: 100px"
-                                 src="{{ $ticket->image }}">
-                        </div>
-                        <div class="col-8 right">
-                            <div style="float: left;margin: 5px 10px">
-                                <span style="float: left ;margin: 0 5px "> ویزگی ها : </span>
-                                @foreach(unserialize($ticket->property) as $property)
-                                    {{ $property }},
-                                @endforeach
-                            </div>
+    @foreach($parentTickets as $ticket)
 
-                            <div style="float: left;margin: 5px 10px">
-                                <span style="float: left ;margin: 0 5px "> توضیح : </span>
-                                {{ $ticket->description }}
-                            </div>
-
+        <div class="accordion-item">
+            <h3>
+                (گروهی)
+                {{ $ticket->title }}
+            </h3>
+            <div class="accordion-header" id="{{ $ticket->id }}">
+                <div class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                     data-bs-target="#flush-{{ $ticket->id }}" aria-expanded="false"
+                     aria-controls="flush-{{ $ticket->id }}">
+                    <div class="col-4 left">
+                        <img style="width: 70%;height: 100px"
+                             src="{{ $ticket->image }}">
+                    </div>
+                    <div class="col-8 right">
+                        <div style="float: left;margin: 5px 10px">
+                            <span style="float: left ;margin: 0 5px "> ویزگی ها : </span>
+                            @foreach(unserialize($ticket->property) as $property)
+                                {{ $property }},
+                            @endforeach
                         </div>
+
+                        <div style="float: left;margin: 5px 10px">
+                            <span style="float: left ;margin: 0 5px "> توضیح : </span>
+                            {{ $ticket->description }}
+                        </div>
+
                     </div>
                 </div>
-                @foreach($tickets as $childTicket)
-                    @if($childTicket->parent == $ticket->id)
-                        <div id="flush-{{ $ticket->id }}" class="accordion-collapse collapse"
-                             aria-labelledby="{{ $childTicket->id }}"
-                             data-bs-parent="#accordionFlushExample">
-                            <div class="accordion-body" style="width: 100%; float: left">
-                                <div class="col-4 left" style="float: left">
-                                    <img style="width: 70%;height: 100px"
-                                         src="{{ $childTicket->image }}">
-                                </div>
-                                <div class="col-8 right" style="float: right">
-                                    <div style="float: left;margin: 5px 10px">
-                                        <span style="float: left ;margin: 0 5px "> ویزگی ها : </span>
-                                        @foreach(unserialize($childTicket->property) as $property)
-                                            {{ $property }},
-                                        @endforeach
-                                    </div>
-
-                                    <div style="float: left;margin: 5px 10px">
-                                        <span style="float: left ;margin: 0 5px "> توضیح : </span>
-                                        {{ $childTicket->description }}
-                                    </div>
-
-                                    <div style="float: left;margin: 5px 10px">
-                                        <span style="float: left ;margin: 0 5px "> قیمت نقدی : </span>
-                                        {{ $childTicket->priceCash }}
-                                    </div>
-
-                                    <h4 style="float: left;width: 100%">شرایط اقساطی</h4>
-
-                                    <div style="float: left;margin: 5px 10px">
-                                        <span style="float: left ;margin: 0 5px "> قیمت اقساطی : </span>
-                                        {{ $childTicket->priceInstallment }}
-                                    </div>
-
-                                    <div style="float: left;margin: 5px 10px">
-                                        <span style="float: left ;margin: 0 5px "> پیش پرداخت : </span>
-                                        {{ $childTicket->prepayment }}
-                                    </div>
-
-                                    <div style="float: left;margin: 5px 10px">
-                                        <span style="float: left ;margin: 0 5px "> مدت زمان اقساط : </span>
-                                        {{ $childTicket->installmentTime }}
-                                    </div>
-
-                                    <div style="float: left;margin: 5px 10px">
-                                        <span style="float: left ;margin: 0 5px "> تعداد اقساط : </span>
-                                        {{ $childTicket->installmentNum }}
-                                    </div>
-
-                                    @guest()
-                                        <div style="float: left;margin: 5px 10px">
-                                            <a class="btn btn-primary" href="{{ route('login') }}"> برای خرید محصول
-                                                ابتدا لاگین کنید</a>
-                                        </div>
-                                    @endguest()
-                                    @auth()
-                                        <div style="float: left;margin: 5px 10px">
-                                            <a class="btn btn-success" href="{{ '/order/info/'.$childTicket->id }}">
-                                                خرید محصول </a>
-                                        </div>
-                                    @endauth
-                                </div>
-                            </div>
-                            <div style="width: 100%;height: 1px;background: #000;margin: 5px 0;float: left"></div>
-                        </div>
-                    @endif
-                @endforeach
             </div>
-        @elseif($ticket->parent==0 && $ticket->type == 0)
-            <div class="accordion-item">
-                <h3>
-                    (مشاع)
-                    {{ $ticket->title }}
-                </h3>
-                <div class="accordion-header" id=" {{ $ticket->id }} ">
-                    <div class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                         data-bs-target="#flush-{{ $ticket->id }}" aria-expanded="false"
-                         aria-controls="flush-{{ $ticket->id }}">
-                        <div class="col-4 left">
+            @foreach($childTickets as $childTicket)
+                <div id="flush-{{ $ticket->id }}" class="accordion-collapse collapse"
+                     aria-labelledby="{{ $childTicket->id }}"
+                     data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body" style="width: 100%; float: left">
+                        <div class="col-4 left" style="float: left">
                             <img style="width: 70%;height: 100px"
-                                 src="{{ $ticket->image }}">
+                                 src="{{ $childTicket->image }}">
                         </div>
                         <div class="col-8 right" style="float: right">
                             <div style="float: left;margin: 5px 10px">
                                 <span style="float: left ;margin: 0 5px "> ویزگی ها : </span>
-                                @foreach(unserialize($ticket->property) as $property)
+                                @foreach(unserialize($childTicket->property) as $property)
                                     {{ $property }},
                                 @endforeach
                             </div>
 
                             <div style="float: left;margin: 5px 10px">
                                 <span style="float: left ;margin: 0 5px "> توضیح : </span>
-                                {{ $ticket->description }}
+                                {{ $childTicket->description }}
                             </div>
 
                             <div style="float: left;margin: 5px 10px">
                                 <span style="float: left ;margin: 0 5px "> قیمت نقدی : </span>
-                                {{ $ticket->priceCash }}
+                                {{ $childTicket->priceCash }}
                             </div>
 
                             <h4 style="float: left;width: 100%">شرایط اقساطی</h4>
 
                             <div style="float: left;margin: 5px 10px">
                                 <span style="float: left ;margin: 0 5px "> قیمت اقساطی : </span>
-                                {{ $ticket->priceInstallment }}
+                                {{ $childTicket->priceInstallment }}
                             </div>
 
                             <div style="float: left;margin: 5px 10px">
                                 <span style="float: left ;margin: 0 5px "> پیش پرداخت : </span>
-                                {{ $ticket->prepayment }}
+                                {{ $childTicket->prepayment }}
                             </div>
 
                             <div style="float: left;margin: 5px 10px">
                                 <span style="float: left ;margin: 0 5px "> مدت زمان اقساط : </span>
-                                {{ $ticket->installmentTime }}
+                                {{ $childTicket->installmentTime }}
                             </div>
 
                             <div style="float: left;margin: 5px 10px">
                                 <span style="float: left ;margin: 0 5px "> تعداد اقساط : </span>
-                                {{ $ticket->installmentNum }}
+                                {{ $childTicket->installmentNum }}
                             </div>
 
                             @guest()
@@ -181,27 +106,101 @@
                             @endguest()
                             @auth()
                                 <div style="float: left;margin: 5px 10px">
-                                    <a class="btn btn-success" href="{{ route('Order.create',$ticket->id) }}">
+
+                                    <a class="btn btn-success" href="{{ '/order/info/'.$childTicket->id }}">
                                         خرید محصول </a>
                                 </div>
                             @endauth
                         </div>
                     </div>
+                    <div style="width: 100%;height: 1px;background: #000;margin: 5px 0;float: left"></div>
                 </div>
-                {{--<div id="flush-{{ $ticket->id }}" class="accordion-collapse collapse"
-                     aria-labelledby="{{ $ticket->id }}"
-                     data-bs-parent="#accordionFlushExample">
-                    <div class="accordion-body" style="width: 100%; float: left">
-                        <div class="col-4 left" style="float: left">
-                            <img style="width: 70%;height: 100px"
-                                 src="https://via.placeholder.com/640x480.png/00ffcc?text=debitis">
-                        </div>
-                        <div class="col-8 right" style="float: right">
-                        </div>
+            @endforeach
+        </div>
+    @endforeach
+    @foreach($OwnTickets as $OwnTicket)
+        <div class="accordion-item">
+            <h3>
+                (مشاع)
+                {{ $OwnTicket->title }}
+            </h3>
+            <div class="accordion-header" id=" {{ $OwnTicket->id }} ">
+                <div class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                     data-bs-target="#flush-{{ $OwnTicket->id }}" aria-expanded="false"
+                     aria-controls="flush-{{ $OwnTicket->id }}">
+                    <div class="col-4 left">
+                        <img style="width: 70%;height: 100px"
+                             src="{{ $OwnTicket->image }}">
                     </div>
-                </div>--}}
+                    <div class="col-8 right" style="float: right">
+                        <div style="float: left;margin: 5px 10px">
+                            <span style="float: left ;margin: 0 5px "> ویزگی ها : </span>
+                            @foreach(unserialize($OwnTicket->property) as $property)
+                                {{ $property }},
+                            @endforeach
+                        </div>
+
+                        <div style="float: left;margin: 5px 10px">
+                            <span style="float: left ;margin: 0 5px "> توضیح : </span>
+                            {{ $OwnTicket->description }}
+                        </div>
+
+                        <div style="float: left;margin: 5px 10px">
+                            <span style="float: left ;margin: 0 5px "> قیمت نقدی : </span>
+                            {{ $OwnTicket->priceCash }}
+                        </div>
+
+                        <h4 style="float: left;width: 100%">شرایط اقساطی</h4>
+
+                        <div style="float: left;margin: 5px 10px">
+                            <span style="float: left ;margin: 0 5px "> قیمت اقساطی : </span>
+                            {{ $OwnTicket->priceInstallment }}
+                        </div>
+
+                        <div style="float: left;margin: 5px 10px">
+                            <span style="float: left ;margin: 0 5px "> پیش پرداخت : </span>
+                            {{ $OwnTicket->prepayment }}
+                        </div>
+
+                        <div style="float: left;margin: 5px 10px">
+                            <span style="float: left ;margin: 0 5px "> مدت زمان اقساط : </span>
+                            {{ $OwnTicket->installmentTime }}
+                        </div>
+
+                        <div style="float: left;margin: 5px 10px">
+                            <span style="float: left ;margin: 0 5px "> تعداد اقساط : </span>
+                            {{ $OwnTicket->installmentNum }}
+                        </div>
+
+                        @guest()
+                            <div style="float: left;margin: 5px 10px">
+                                <a class="btn btn-primary" href="{{ route('login') }}"> برای خرید محصول
+                                    ابتدا لاگین کنید</a>
+                            </div>
+                        @endguest()
+                        @auth()
+                            <div style="float: left;margin: 5px 10px">
+                                <a class="btn btn-success" href="{{ route('Order.create',$OwnTicket->id) }}">
+                                    خرید محصول </a>
+                            </div>
+                        @endauth
+                    </div>
+                </div>
             </div>
-        @endif
+            {{--<div id="flush-{{ $ticket->id }}" class="accordion-collapse collapse"
+                 aria-labelledby="{{ $ticket->id }}"
+                 data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body" style="width: 100%; float: left">
+                    <div class="col-4 left" style="float: left">
+                        <img style="width: 70%;height: 100px"
+                             src="https://via.placeholder.com/640x480.png/00ffcc?text=debitis">
+                    </div>
+                    <div class="col-8 right" style="float: right">
+                    </div>
+                </div>
+            </div>--}}
+        </div>
+
     @endforeach
 </div>
 </body>

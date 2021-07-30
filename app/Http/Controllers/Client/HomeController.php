@@ -12,9 +12,17 @@ class HomeController extends Controller
     //
     public function index()
     {
-        $tickets = Ticket::leftJoin('installment_features', 'tickets.id', '=', 'installment_features.ticket_id')
-            ->orderBy(DB::raw('tickets.id'),'Desc')
+        $parentTickets = Ticket::where([
+            'parent'=> 0,
+            'type'=>1
+            ])->get();
+        $OwnTickets = Ticket::leftJoin('installment_features', 'tickets.id', '=', 'installment_features.ticket_id')
+        ->where(DB::raw('tickets.type'), '!=', 0)
+        ->get();
+
+        $childTickets = Ticket::leftJoin('installment_features', 'tickets.id', '=', 'installment_features.ticket_id')
+            ->where(DB::raw('tickets.parent'), '!=', 0)
             ->get();
-        return view('client.home',compact('tickets'));
+        return view('client.home', compact(['childTickets', 'parentTickets','OwnTickets']));
     }
 }

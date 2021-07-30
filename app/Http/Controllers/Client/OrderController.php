@@ -12,6 +12,7 @@ use \Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
+
 class OrderController extends Controller
 {
 
@@ -52,6 +53,12 @@ class OrderController extends Controller
         resolve(OrderRipositpry::class)->createOrder($totalAmount, $userInfo, $ticketInfo, $payMethod,$ticket);
     }
 
+    public function verify(Request $request)
+    {
+        if ($request->has('Authority')){
+            dd($request->has('Authority'));
+        }
+    }
 
     /**
      * Show the form for editing the specified resource.

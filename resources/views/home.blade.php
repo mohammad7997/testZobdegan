@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    {{dd( Zarinpal::verify('OK', 1000, $results['Authority']))}}
+    
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">

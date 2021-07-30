@@ -18,6 +18,7 @@ class CreateOrdersTable extends Migration
             $table->string('totalAmount');
             $table->tinyInteger('payMethod');//0=>installment , 1=>cash
             $table->text('authority');// from zarinpal
+            $table->text('ticketInfo');
             $table->text('userInfo')->nullable();
             $table->tinyInteger('payStatus')->default(0);//0=>not pay , 1=>pay , 2=>installment
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
