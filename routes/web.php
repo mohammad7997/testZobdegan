@@ -22,7 +22,7 @@ Auth::routes();
 Route::get('/', [HomeController::class, 'index'])->name('index');
 Route::prefix('order/')->name('Order.')->group(function () {
     Route::get('/info/{ticket}', [OrderController::class, 'create'])->name('create');
-    Route::get('/store/{ticket}', [OrderController::class, 'store'])->name('store');
+    Route::post('/store/{ticket}', [OrderController::class, 'store'])->name('store');
 });
 
 

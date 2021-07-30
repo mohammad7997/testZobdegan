@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 use App\Models\Ticket;
+use App\Repository\OrderRipositpry;
 use Illuminate\Http\Request;
 use \Illuminate\Contracts\Foundation\Application;
 use \Illuminate\Contracts\View\Factory;
@@ -47,7 +48,8 @@ class OrderController extends Controller
             'email' => $request->input('email')
         ]);
         $ticketInfo = serialize($ticket);
-        $userId=Auth::id();
+        $payMethod=$request->payMethod;
+        resolve(OrderRipositpry::class)->createOrder($totalAmount, $userInfo, $ticketInfo, $payMethod,$ticket);
     }
 
 
