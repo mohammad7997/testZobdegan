@@ -21,5 +21,11 @@
                 </ul>
             </div>
         </li>
+
+        <li class="nav-item nav-category">
+            <a href="{{ route('Admin.user') }}">
+                کاربر ها
+            </a>
+        </li>
     </ul>
 </nav>

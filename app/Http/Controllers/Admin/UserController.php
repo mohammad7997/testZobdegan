@@ -18,9 +18,18 @@ class UserController extends Controller
     public function userStatus(User $user)
     {
         $userStatus = $user->status;
-        $user->update([
-            'status' => $userStatus == 1 ? 0 : 1
-        ]);
-        return redirect();
+        try {
+
+
+            $user->update([
+                'status' => $userStatus == 1 ? 0 : 1
+            ]);
+            $msg = 'وضعیت کاربر تغییر کرد';
+            return redirect(route('Admin.user'))->with('success',$msg);
+        }catch (\Exception $e){
+
+            $msg = 'وضعیت کاربر تغییر نکرد';
+            return redirect(route('Admin.user'))->with('failed',$msg);
+        }
     }
 }
