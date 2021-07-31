@@ -25,8 +25,8 @@ class TicketSeeder extends Seeder
                         'parent' => $parentTicket,
                         'priceCash'=>5000,
                         'priceInstallment'=>10000,
-                        'descriptionTopFactor'=>$this->faker->text(150),
-                        'descriptionBottomFactor'=>$this->faker->text(150)
+                        'descriptionTopFactor'=>'toppppppppppppppppppppppppppp',
+                        'descriptionBottomFactor'=>'bottommmmmmmmmmmmmmmmmmmmmmm'
                     ]);
                     InstallmentFeature::factory()->create([
                         'ticket_id' => $childTicket->id
@@ -40,8 +40,8 @@ class TicketSeeder extends Seeder
             $parentTicket->update([
                 'priceCash'=>5000,
                 'priceInstallment'=>10000,
-                'descriptionTopFactor'=>$this->faker->text(150),
-                'descriptionBottomFactor'=>$this->faker->text(150)
+                'descriptionTopFactor'=>'toppppppppppppppppppppppppppp',
+                'descriptionBottomFactor'=>'bottommmmmmmmmmmmmmmmmmmmmmm'
             ]);
         }
     }
