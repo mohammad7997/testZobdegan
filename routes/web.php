@@ -6,6 +6,8 @@ use App\Http\Controllers\Admin\TicketController;
 use \App\Http\Controllers\Client\HomeController;
 use \App\Http\Controllers\Client\OrderController;
 use \App\Http\Controllers\Client\panelController;
+use \App\Http\Controllers\Admin\UserController;
+use \App\Http\Controllers\Admin\OrderAdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,6 +54,13 @@ Route::prefix('admin/')->middleware(['auth','CheckRoleAdmin'])->name('Admin.')->
     Route::get('/childTicket/{ticket}', [TicketController::class, 'childTicket'])->name('childTicket');
     Route::get('childTicket/create/{ticket}', [TicketController::class, 'createChildTicket'])->name('createChildTicket');
     Route::get('childTicket/edit/{ticket}', [TicketController::class, 'editChildTicket'])->name('editChildTicket');
+
+    // route of user info
+    Route::get('user', [UserController::class, 'index'])->name('user');
+    Route::get('user/status/{user}', [UserController::class, 'userStatus'])->name('userStatus');
+
+    //rote of orders
+    Route::get('order', [OrderAdminController::class, 'order'])->name('order');
 });
 
 
