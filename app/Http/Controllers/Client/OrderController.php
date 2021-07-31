@@ -113,6 +113,7 @@ class OrderController extends Controller
             'mode' => 'utf-8',
             'orientation' => 'P',
         ]);
+        $mpdf->SetDefaultFont('BMitra');
         $mpdf->WriteHTML($html);
         $mpdf->Output();
     }

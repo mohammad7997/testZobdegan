@@ -19,6 +19,18 @@
 <div class="container">
     <div class="row col-6" style="margin: 60px auto">
         <style>
+
+            @font-face {
+                font-family: 'BMitra';
+                src: url({{ asset('fonts/font-web-optimized-ronakweb/BMitra.ttf') }}) format("truetype"),
+                 url({{ asset('fonts/font-web-optimized-ronakweb/BMitra.eot') }}) format("embedded-opentype")
+
+            }
+
+            *{
+                font-family: BMitra;
+            }
+
             tr {
                 border: 1px solid #000;
                 text-align: center;
@@ -48,7 +60,6 @@
                     <span> نامخانوادگی : {{ $userInfo->family }} </span>
                     <span> کد ملی : {{ $userInfo->nationalId }} </span>
                     <span> شماره تلفن : {{ $userInfo->phone }} </span>
-                    <span> جنسیت : {{ $userInfo->gender }} </span>
                     <span> آدرس : {{ $userInfo->address }} </span>
                     <span> ایمیل : {{ $userInfo->email }} </span>
 
