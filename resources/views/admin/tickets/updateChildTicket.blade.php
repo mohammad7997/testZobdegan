@@ -135,7 +135,7 @@
                     </div>
 
                     <div class="form-group">
-                        <img src="{{ $ticket->image }}">
+                        <img src="{{ asset($ticket->image) }}">
                     </div>
 
                     <button type="submit" class="btn btn-primary me-2">Submit</button>

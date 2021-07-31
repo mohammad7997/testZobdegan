@@ -136,7 +136,7 @@
                     </div>
 
                     <div class="form-group">
-                        <img src="{{ $ticket->image }}">
+                        <img src="{{ asset($ticket->image) }}">
                     </div>
 
 

@@ -23,7 +23,7 @@
     <div class="row" style="border: 1px solid #888f91">
         <div class="col-4 left" style="float: left">
             <img style="width: 70%;height: 100px"
-                 src="{{ $ticket->image }}">
+                 src="{{ asset($ticket->image) }}">
         </div>
         <div class="col-8 right" style="float: right">
             <h2> نام آگهی :{{ $ticket->title }} </h2>

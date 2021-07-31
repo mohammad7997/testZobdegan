@@ -32,7 +32,7 @@
                          aria-controls="flush-{{ $ticket->id }}">
                         <div class="col-4 left">
                             <img style="width: 70%;height: 100px"
-                                 src="{{ $ticket->image }}">
+                                 src="{{ asset($ticket->image) }}">
                         </div>
                         <div class="col-8 right">
                             <div style="float: left;margin: 5px 10px">
@@ -60,7 +60,7 @@
                             <div class="accordion-body" style="width: 100%; float: left">
                                 <div class="col-4 left" style="float: left">
                                     <img style="width: 70%;height: 100px"
-                                         src="{{ $childTicket->image }}">
+                                         src="{{ asset($childTicket->image) }}">
                                 </div>
                                 <div class="col-8 right" style="float: right">
                                     <div style="float: left;margin: 5px 10px">
@@ -135,7 +135,7 @@
                          aria-controls="flush-{{ $ticket->id }}">
                         <div class="col-4 left">
                             <img style="width: 70%;height: 100px"
-                                 src="{{ $ticket->image }}">
+                                 src="{{ asset($ticket->image) }}">
                         </div>
                         <div class="col-8 right" style="float: right">
                             <div style="float: left;margin: 5px 10px">

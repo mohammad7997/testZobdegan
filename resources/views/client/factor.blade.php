@@ -47,12 +47,12 @@
         </style>
         <table class="table ">
             <tbody>
-            <tr>
+            <tr style="border: 1px solid #000;text-align: center;">
                 <td>
                     {{ $ticketInfo->descriptionTopFactor }}
                 </td>
             </tr>
-            <tr>
+            <tr style="border: 1px solid #000;text-align: center;">
 
                 <td>
 
@@ -65,7 +65,7 @@
 
                 </td>
             </tr>
-            <tr>
+            <tr style="border: 1px solid #000;text-align: center;">
 
                 <td>
                     <span> نام کالا : {{ $ticketInfo->title }} </span>
@@ -74,7 +74,7 @@
                     <span> نوع خرید : {{ $payMethod }} </span>
                 </td>
             </tr>
-            <tr>
+            <tr style="border: 1px solid #000;text-align: center;">
                 <td>
                     {{ $ticketInfo->descriptionBottomFactor }}
                 </td>
