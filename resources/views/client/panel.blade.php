@@ -16,6 +16,8 @@
             crossorigin="anonymous"></script>
 </head>
 <body>
+@include('admin.layout.message')
+
 <div class="col-lg-6 grid-margin stretch-card" style="margin: 125px auto">
     <div class="card">
         <div class="card-body">
@@ -74,8 +76,8 @@
                     </thead>
                     <tbody>
 
-                    {{ print_r(date('Y-m-d',strtotime(now()))) }}
                     @foreach($installments as $installment)
+
                         @php $ticketInfo=unserialize($installment->ticketInfo) @endphp
                         <tr>
                             <td>{{ $ticketInfo->title }}</td>
@@ -89,8 +91,9 @@
                             <td>{{ $installment->timeOfInstallment }}</td>
 
                             <td>
-                                <a class="btn btn-success">
-
+                                <a class="btn btn-success"
+                                   href="/panel/pay/{{$installment->idInstallment}}">
+                                    پرداخت
                                 </a>
                             </td>
                         </tr>

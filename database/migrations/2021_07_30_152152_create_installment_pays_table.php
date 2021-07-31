@@ -17,6 +17,7 @@ class CreateInstallmentPaysTable extends Migration
             $table->id();
             $table->integer('totalAmount');
             $table->integer('prepayment');
+            $table->string('authority');
             $table->integer('installmentPay');//pay of one installment
             $table->integer('installmentNum');
             $table->string('timeOfInstallment');//time of next installment

@@ -32,7 +32,7 @@ class OrderRipositpry
         Zarinpal::redirect(); // redirect user to zarinpal
     }
 
-    public function createOrder($totalAmount, $userInfo, $ticketInfo, $payMethod,Ticket $ticket)
+    public function createOrder($totalAmount, $userInfo, $ticketInfo, $payMethod, Ticket $ticket)
     {
         $amount = $ticket->payMethod == 0 ? $ticket->InstallmentFeature()->first()->prepayment : $ticket->priceCash;
         $this->getAuthority($amount);
@@ -46,7 +46,7 @@ class OrderRipositpry
             'user_id' => Auth::id(),
         ]);
         $this->zarinpal();
-        $verifyZarinpal = Zarinpal::verify('OK', $totalAmount, $this->authority);
+        //$verifyZarinpal = Zarinpal::verify('OK', $totalAmount, $this->authority);
     }
 
     /**
@@ -67,19 +67,20 @@ class OrderRipositpry
                 'payStatus' => 2
             ]);
 
-            $time=strtotime(now());
+            $time = strtotime(now());
             $ticketInfo = unserialize($order->ticketInfo);
-           //    dd($ticketInfo->InstallmentFeature()->first()->prepayment);
-            $InstallmentTime = ($ticketInfo->installmentTime) * 30 * 24 * 60 * 60;
-            $nextInstallmentTime=$time+$InstallmentTime;
-           // dd(date('Y-m-d',$nextInstallmentTime));
+            $InstallmentTime = ($ticketInfo->InstallmentFeature()->first()->installmentTime) * 30 * 24 * 60 * 60;
+            //dd($InstallmentTime);
+            $nextInstallmentTime = $time + $InstallmentTime;
+
             $nextInstallmentTime = date('Y-m-d', $nextInstallmentTime);
 
-            $InstallmentFeature=$ticketInfo->InstallmentFeature()->first();
+            $InstallmentFeature = $ticketInfo->InstallmentFeature()->first();
 
             $order->installmentPay()->create([
                 'totalAmount' => $order->totalAmount,
                 'prepayment' => $InstallmentFeature->prepayment,
+                'authority'=>$order->authority,
                 'installmentPay' => $ticketInfo->priceInstallment / $InstallmentFeature->installmentNum,
                 'installmentNum' => $InstallmentFeature->installmentNum,
                 'timeOfInstallment' => $nextInstallmentTime,

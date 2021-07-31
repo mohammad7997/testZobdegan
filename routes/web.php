@@ -30,7 +30,9 @@ Route::prefix('order/')->name('Order.')->group(function () {
 });
 
 Route::prefix('panel/')->name('Panel.')->group(function () {
-    Route::get('/index ', [panelController::class, 'index'])->name('index');
+    Route::get('/index', [panelController::class, 'index'])->name('index');
+    Route::get('/pay/{installmentPay} ', [panelController::class, 'payInstallment'])->name('installmentPay');
+    Route::get('/verifyPay ', [panelController::class, 'verifyPay'])->name('verifyPay');
 });
 
 Route::prefix('admin/')->name('Admin.')->group(function () {
