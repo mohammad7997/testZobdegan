@@ -33,7 +33,7 @@ class OrderController extends Controller
 
 
     /**
-     * save an order for user
+     * save an order for users
      * @param Request $request
      * @param Ticket $ticket
      */
@@ -82,6 +82,22 @@ class OrderController extends Controller
 
     public function factor(Order $order)
     {
-        return view('client.factor', compact('order'));
+        $ticketInfo=unserialize($order->ticketInfo);
+        if (unserialize($order->userInfo) != '' && unserialize($order->userInfo)->name !=''){
+            $userInfo=$order->userInfo;
+        }else{
+            $userInfo=$order->user()->first();
+        }
+
+
+        if ($order->payStatus == 1){
+            $pay=$order->totalAmount;
+            $payMethod='نقدی';
+        }else{
+            $pay=$order->installmentPay()->first()->prepayment;
+            $payMethod='اقساطی';
+        }
+        //dd($userInfo);
+        return view('client.factor', compact(['order','pay','ticketInfo','userInfo','payMethod']));
     }
 }

@@ -10170,13 +10170,13 @@
       var element = first('meta[name="viewport"]').getOrThunk(nu);
       var backup = get$2(element, 'content');
       var maximize = function () {
-        set(element, 'content', 'width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0');
+        set(element, 'content', 'width=device-width, initial-scale=1.0, users-scalable=no, maximum-scale=1.0');
       };
       var restore = function () {
         if (backup !== undefined && backup !== null && backup.length > 0) {
           set(element, 'content', backup);
         } else {
-          set(element, 'content', 'user-scalable=yes');
+          set(element, 'content', 'users-scalable=yes');
         }
       };
       return {

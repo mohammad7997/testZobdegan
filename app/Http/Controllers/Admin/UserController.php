@@ -12,7 +12,7 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all();
-        return view('admin.users', compact('users'));
+        return view('admin.users.users', compact('users'));
     }
 
     public function userStatus(User $user)
@@ -25,11 +25,11 @@ class UserController extends Controller
                 'status' => $userStatus == 1 ? 0 : 1
             ]);
             $msg = 'وضعیت کاربر تغییر کرد';
-            return redirect(route('Admin.user'))->with('success',$msg);
+            return redirect(route('Admin.users'))->with('success',$msg);
         }catch (\Exception $e){
 
             $msg = 'وضعیت کاربر تغییر نکرد';
-            return redirect(route('Admin.user'))->with('failed',$msg);
+            return redirect(route('Admin.users'))->with('failed',$msg);
         }
     }
 }

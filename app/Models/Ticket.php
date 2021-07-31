@@ -9,8 +9,8 @@ class Ticket extends Model
 {
     use HasFactory;
 
-    protected $fillable=[
-        'title','type','description','image','property','priceCash','priceInstallment','parent'
+    protected $fillable = [
+        'title', 'type', 'description', 'image', 'property', 'priceCash', 'priceInstallment', 'parent', 'descriptionTopFactor', 'descriptionBottomFactor'
     ];
 
     public function InstallmentFeature()

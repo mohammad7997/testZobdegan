@@ -24,7 +24,7 @@ class PanelRepository
 
     public function zarinpal()
     {
-        Zarinpal::redirect(); // redirect user to zarinpal
+        Zarinpal::redirect(); // redirect users to zarinpal
     }
 
     public function pay($installment)

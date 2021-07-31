@@ -22,9 +22,15 @@
             </div>
         </li>
 
-        <li class="nav-item nav-category">
-            <a href="{{ route('Admin.user') }}">
+        <li class="nav-item ">
+            <a href="{{ route('Admin.users') }}">
                 کاربر ها
+            </a>
+        </li>
+
+        <li class="nav-item ">
+            <a href="{{ route('Admin.order') }}">
+                سفارشات
             </a>
         </li>
     </ul>

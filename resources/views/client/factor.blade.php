@@ -19,32 +19,56 @@
 <div class="container">
     <div class="row col-6" style="margin: 60px auto">
         <style>
-            tr{
+            tr {
                 border: 1px solid #000;
                 text-align: center;
+            }
+            td{
+                text-align: center;
+            }
+            td span{
+                margin: 2px 6px;
+                float: right;
+                text-align: center;
+                direction: rtl;
             }
         </style>
         <table class="table ">
             <tbody>
             <tr>
                 <td>
-                    src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
-                    integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
-                    crossorigin="anonymous"
+                    {{ $ticketInfo->descriptionTopFactor }}
+                </td>
+            </tr>
+            <tr>
+
+                <td>
+
+                    <span> نام : {{ $userInfo->name }} </span>
+                    <span> نامخانوادگی : {{ $userInfo->family }} </span>
+                    <span> کد ملی : {{ $userInfo->nationalId }} </span>
+                    <span> شماره تلفن : {{ $userInfo->phone }} </span>
+                    <span> جنسیت : {{ $userInfo->gender }} </span>
+                    <span> آدرس : {{ $userInfo->address }} </span>
+                    <span> ایمیل : {{ $userInfo->email }} </span>
+
+                </td>
+            </tr>
+            <tr>
+
+                <td>
+
+
+                    <span> نام کالا : {{ $ticketInfo->title }} </span>
+                    <span> قیمت کل : {{ $order->totalAmount }} </span>
+                    <span> مبلغ پرداختی : {{ $pay }} </span>
+                    <span> نوع خرید : {{ $payMethod }} </span>
+
                 </td>
             </tr>
             <tr>
                 <td>
-                    src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
-                    integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
-                    crossorigin="anonymous"
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
-                    integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
-                    crossorigin="anonymous"
+                    {{ $ticketInfo->descriptionBottomFactor }}
                 </td>
             </tr>
             </tbody>

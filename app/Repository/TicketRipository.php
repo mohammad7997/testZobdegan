@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: user
+ * User: users
  * Date: 7/27/2021
  * Time: 10:25 AM
  */
@@ -99,6 +99,8 @@ class TicketRipository
                 'property' => $request->input('property') != null ? serialize($request->input('property')) : null,
                 'image' => $urlImage,
                 'description' => $request->input('description'),
+                'descriptionTopFactor' => $request->input('descriptionTopFactor'),
+                'descriptionBottomFactor' => $request->input('descriptionBottomFactor'),
                 'type' => $request->input('type'),
                 'priceCash' => $request->input('priceCash'),
                 'priceInstallment' => $request->input('priceInstallment'),
@@ -179,11 +181,15 @@ class TicketRipository
             }
 
             // update ticket
+
+            //dd($request);
             $ticket->update([
                 'title' => $request->input('title'),
                 'property' => $request->input('property') != null ? serialize($request->input('property')) : null,
                 'image' => $urlImage != '' ? $urlImage : $ticket->image,
                 'description' => $request->input('description'),
+                'descriptionTopFactor' => $request->input('descriptionTopFactor'),
+                'descriptionBottomFactor' => $request->input('descriptionBottomFactor'),
                 'type' => $request->input('type'),
                 'priceCash' => $request->input('priceCash'),
                 'priceInstallment' => $request->input('priceInstallment'),

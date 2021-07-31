@@ -29,7 +29,7 @@ class OrderRipositpry
 
     public function zarinpal()
     {
-        Zarinpal::redirect(); // redirect user to zarinpal
+        Zarinpal::redirect(); // redirect users to zarinpal
     }
 
     public function createOrder($totalAmount, $userInfo, $ticketInfo, $payMethod, Ticket $ticket)

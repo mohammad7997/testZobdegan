@@ -28068,7 +28068,7 @@
     };
 
     var each$h = Tools.each, trim$4 = Tools.trim;
-    var queryParts = 'source protocol authority userInfo user password host port relative path directory file query anchor'.split(' ');
+    var queryParts = 'source protocol authority userInfo users password host port relative path directory file query anchor'.split(' ');
     var DEFAULT_PORTS = {
       ftp: 21,
       http: 80,

@@ -55,9 +55,9 @@ Route::prefix('admin/')->middleware(['auth','CheckRoleAdmin'])->name('Admin.')->
     Route::get('childTicket/create/{ticket}', [TicketController::class, 'createChildTicket'])->name('createChildTicket');
     Route::get('childTicket/edit/{ticket}', [TicketController::class, 'editChildTicket'])->name('editChildTicket');
 
-    // route of user info
-    Route::get('user', [UserController::class, 'index'])->name('user');
-    Route::get('user/status/{user}', [UserController::class, 'userStatus'])->name('userStatus');
+    // route of users info
+    Route::get('users', [UserController::class, 'index'])->name('users');
+    Route::get('users/status/{users}', [UserController::class, 'userStatus'])->name('userStatus');
 
     //rote of orders
     Route::get('order', [OrderAdminController::class, 'order'])->name('order');
