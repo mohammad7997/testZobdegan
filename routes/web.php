@@ -37,7 +37,7 @@ Route::prefix('panel/')->middleware(['auth','CheckRoleUser'])->name('Panel.')->g
     Route::get('/verifyPay ', [panelController::class, 'verifyPay'])->name('verifyPay');
 });
 
-Route::prefix('admin/')/*->middleware(['auth','CheckRoleAdmin'])*/->name('Admin.')->group(function () {
+Route::prefix('admin/')->middleware(['auth','CheckRoleAdmin'])->name('Admin.')->group(function () {
 
     // route of own and group ticket
     Route::get('/', [TicketController::class, 'index'])->name('index');
