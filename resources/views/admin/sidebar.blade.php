@@ -22,13 +22,13 @@
             </div>
         </li>
 
-        <li class="nav-item ">
+        <li class="nav-item nav-category">
             <a href="{{ route('Admin.users') }}">
                 کاربر ها
             </a>
         </li>
 
-        <li class="nav-item ">
+        <li class="nav-item nav-category">
             <a href="{{ route('Admin.order') }}">
                 سفارشات
             </a>

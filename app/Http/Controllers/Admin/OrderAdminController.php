@@ -23,5 +23,6 @@ class OrderAdminController extends Controller
             ->select('orders.*', 'installment_pays.prepayment', 'installment_pays.id as idInstallment', 'installment_pays.timeOfInstallment', 'installment_pays.installmentPay', 'installment_pays.installmentNum')
             ->get();
 
+        return view('admin.orders.orders',compact(['ordersCash','installments']));
     }
 }

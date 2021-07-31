@@ -22,125 +22,101 @@
 @include('admin.layout.message')
 
 
-
-<div class="accordion accordion-flush" id="accordionFlushExample">
-    <h2 style="text-align: center">اطلاعات سفارش</h2>
-    <div class="row" style="border: 1px solid #888f91">
-        <div class="col-4 left" style="float: left">
-            <img style="width: 70%;height: 100px"
-                 src="{{ $ticket->image }}">
-        </div>
-        <div class="col-8 right" style="float: right">
-            <h2> نام آگهی :{{ $ticket->title }} </h2>
-            <div style="float: left;margin: 5px 10px">
-                <span style="float: left ;margin: 0 5px "> ویزگی ها : </span>
-                @foreach(unserialize($ticket->property) as $property)
-                    {{ $property }},
-                @endforeach
-            </div>
-
-            <div style="float: left;margin: 5px 10px">
-                <span style="float: left ;margin: 0 5px "> توضیح : </span>
-                {{ $ticket->description }}
-            </div>
-
-            <div style="float: left;margin: 5px 10px">
-                <span style="float: left ;margin: 0 5px "> قیمت نقدی : </span>
-                {{ $ticket->priceCash }}
-            </div>
-
-            <h4 style="float: left;width: 100%">شرایط اقساطی</h4>
-
-            <div style="float: left;margin: 5px 10px">
-                <span style="float: left ;margin: 0 5px "> قیمت اقساطی : </span>
-                {{ $ticket->priceInstallment }}
-            </div>
-
-            <div style="float: left;margin: 5px 10px">
-                <span style="float: left ;margin: 0 5px "> پیش پرداخت : </span>
-                {{ $ticket->prepayment }}
-            </div>
-
-            <div style="float: left;margin: 5px 10px">
-                <span style="float: left ;margin: 0 5px "> مدت زمان اقساط : </span>
-                {{ $ticket->installmentTime }}
-            </div>
-
-            <div style="float: left;margin: 5px 10px">
-                <span style="float: left ;margin: 0 5px "> تعداد اقساط : </span>
-                {{ $ticket->installmentNum }}
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<div class="col-md-10 grid-margin stretch-card" style="margin: 40px auto;">
+<div class="col-lg-9 grid-margin stretch-card" style="margin: 125px auto">
     <div class="card">
         <div class="card-body">
-            <form class="forms-sample" method="post" action="{{ route('Order.store',$ticket->id) }}">
-                @csrf
-                <div class="form-group">
-                    <label for="exampleInputUsername1">نوع پرداخت</label>
-                    <select class="form-control" id="exampleSelectGender" name="payMethod">
-                        <option value="0">اقساطی</option>
-                        <option value="1">نقدی</option>
-                    </select>
-                </div>
-                <br>
-                <br>
-                <br>
-                <br>
-                <h3>اطلاعات شخص دیگر برای سفارش (اختیاری)</h3>
-                <div class="form-group">
-                    <label for="exampleInputUsername1">نام</label>
-                    <input type="text" class="form-control" id="exampleInputUsername1" name="name">
-                </div>
+            <h4 class="card-title">سفارشات پرداخت شده</h4>
+            <p class="card-description">
+                Add class <code>.table</code>
+            </p>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>نام کالا</th>
+                        <th>قیمت کالا</th>
+                        <th>نام کاربر</th>
+                        <th>ایمیل کاربر</th>
+                        <th>تاریخ پرداخت</th>
+                    </tr>
+                    </thead>
+                    <tbody>
 
+                    @if($ordersCash!='')
+                        @foreach($ordersCash as $orderCash)
+                            @php $ticketInfo=unserialize($orderCash->ticketInfo) @endphp
+                            <tr>
+                                <td>{{ $ticketInfo->title }}</td>
 
-                <div class="form-group">
-                    <label for="exampleInputUsername1">نام خانوادگی</label>
-                    <input type="text" class="form-control" id="exampleInputUsername1" name="family">
-                </div>
+                                <td>{{ $orderCash->user()->first()->name }}</td>
 
+                                <td>{{ $orderCash->user()->first()->email }}</td>
 
-                <div class="form-group">
-                    <label for="exampleInputUsername1">کد ملی</label>
-                    <input type="number" class="form-control" id="exampleInputUsername1" name="nationalId">
-                </div>
+                                <td>{{ $orderCash->totalAmount }}</td>
 
+                                <td>{{ $orderCash->created_at }}</td>
+                            </tr>
+                        @endforeach
+                    @endif
+                    </tbody>
+                </table>
 
-                <div class="form-group">
-                    <label for="exampleInputUsername1">شماره تلفن</label>
-                    <input type="number" class="form-control" id="exampleInputUsername1" name="phone">
-                </div>
-
-                <div class="form-group">
-                    <label for="exampleInputUsername1">جنسیت</label>
-                    <select class="form-control" id="exampleSelectGender" name="gender">
-                        <option value="0">مرد</option>
-                        <option value="1">زن</option>
-                    </select>
-                </div>
-
-
-                <div class="form-group">
-                    <label for="exampleInputUsername1">آدرس</label>
-                    <textarea type="text" class="form-control" id="exampleInputUsername1" name="address"></textarea>
-                </div>
-
-
-                <div class="form-group">
-                    <label for="exampleInputEmail1">آدرس ایمل</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" name="email">
-                </div>
-                <button type="submit" class="btn btn-primary me-2">Submit</button>
-                <button class="btn btn-light">Cancel</button>
-            </form>
+            </div>
         </div>
     </div>
 </div>
 
+
+<div class="col-lg-11 grid-margin stretch-card" style="margin: 125px auto">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">سفارشات اقساطی</h4>
+            <p class="card-description">
+                Add class <code>.table</code>
+            </p>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>نام کالا</th>
+                        <th>نام کاربر</th>
+                        <th>ایمیل کاربر</th>
+                        <th>قیمت کل کالا</th>
+                        <th>مبلغ هر قسط</th>
+                        <th>تعداد اقساط باقی مانده</th>
+                        <th>تاریخ قسط بعدی</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    @if($installments!='')
+                        @foreach($installments as $installment)
+
+                            @php $ticketInfo=unserialize($installment->ticketInfo) @endphp
+                            <tr>
+                                <td>{{ $ticketInfo->title }}</td>
+
+                                <td>{{ $installment->user()->first()->name }}</td>
+
+                                <td>{{ $installment->user()->first()->email }}</td>
+
+                                <td>{{ $installment->totalAmount }}</td>
+
+                                <td>{{ $installment->installmentPay }}</td>
+
+                                <td>{{ $installment->installmentNum }}</td>
+
+                                <td>{{ $installment->timeOfInstallment }}</td>
+                            </tr>
+                        @endforeach
+                    @endif
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
 
 
 </body>
