@@ -40,15 +40,28 @@ class OrderController extends Controller
     public function store(Request $request, Ticket $ticket)
     {
         $totalAmount = $ticket->payMethod == 0 ? $ticket->priceInstallment : $ticket->priceCash;
-        $userInfo = serialize([
-            'name' => $request->input('name'),
-            'family' => $request->input('family'),
-            'nationalId' => $request->input('nationalId'),
-            'phone' => $request->input('phone'),
-            'gender' => $request->input('gender'),
-            'address' => $request->input('address'),
-            'email' => $request->input('email')
-        ]);
+        $userInfo = '';
+        if ($request->input('name') != '') {
+            $request->validate([
+                'name' => 'required',
+                'family' => 'required',
+                'nationalId' => 'required',
+                'phone' => 'required',
+                'gender' => 'required',
+                'address' => 'required',
+                'email' => 'required',
+            ]);
+
+            $userInfo = serialize([
+                'name' => $request->input('name'),
+                'family' => $request->input('family'),
+                'nationalId' => $request->input('nationalId'),
+                'phone' => $request->input('phone'),
+                'gender' => $request->input('gender'),
+                'address' => $request->input('address'),
+                'email' => $request->input('email')
+            ]);
+        }
         $ticketInfo = serialize($ticket);
         $payMethod = $request->payMethod;
         resolve(OrderRipositpry::class)->createOrder($totalAmount, $userInfo, $ticketInfo, $payMethod, $ticket);

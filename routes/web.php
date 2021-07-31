@@ -22,20 +22,20 @@ Auth::routes();
 
 Route::get('/', [HomeController::class, 'index'])->name('index');
 
-Route::prefix('order/')->name('Order.')->group(function () {
+Route::prefix('order/')->middleware(['auth','CheckRoleUser'])->name('Order.')->group(function () {
     Route::get('/info/{ticket}', [OrderController::class, 'create'])->name('create');
     Route::post('/store/{ticket}', [OrderController::class, 'store'])->name('store');
     Route::get('verify', [OrderController::class, 'verify'])->name('verify');
     Route::get('factor/{order}', [OrderController::class, 'factor'])->name('factor');
 });
 
-Route::prefix('panel/')->name('Panel.')->group(function () {
+Route::prefix('panel/')->middleware(['auth','CheckRoleUser'])->name('Panel.')->group(function () {
     Route::get('/index', [panelController::class, 'index'])->name('index');
     Route::get('/pay/{installmentPay} ', [panelController::class, 'payInstallment'])->name('installmentPay');
     Route::get('/verifyPay ', [panelController::class, 'verifyPay'])->name('verifyPay');
 });
 
-Route::prefix('admin/')->name('Admin.')->group(function () {
+Route::prefix('admin/')->middleware(['auth','CheckRoleAdmin'])->name('Admin.')->group(function () {
 
     // route of own and group ticket
     Route::get('/', [TicketController::class, 'index'])->name('index');
@@ -55,6 +55,4 @@ Route::prefix('admin/')->name('Admin.')->group(function () {
 });
 
 
-Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

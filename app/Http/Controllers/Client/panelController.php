@@ -18,10 +18,10 @@ class panelController extends Controller
     {
         $ordersCash = Order::query()->where([
             'payStatus' => 1,
-            'user_id'=>Auth::id()
+            'user_id' => Auth::id()
         ])->get();
 
-        $installments=Order::query()->leftJoin('installment_pays', 'orders.id', '=', 'installment_pays.order_id')
+        $installments = Order::query()->leftJoin('installment_pays', 'orders.id', '=', 'installment_pays.order_id')
             ->orderBy(DB::raw('orders.id'), 'Desc')
             ->where(DB::raw('orders.user_id'), Auth::id())
             ->where(DB::raw('orders.payMethod'), 0)
@@ -29,7 +29,7 @@ class panelController extends Controller
             ->select('orders.*', 'installment_pays.prepayment', 'installment_pays.id as idInstallment', 'installment_pays.timeOfInstallment', 'installment_pays.installmentPay', 'installment_pays.installmentNum')
             ->get();
 
-        return view('client.panel',compact(['ordersCash','installments']));
+        return view('client.panel', compact(['ordersCash', 'installments']));
     }
 
     public function payInstallment(InstallmentPay $installmentPay)
