@@ -77,6 +77,15 @@
 
 
                     <div id="price" style="display: block">  {{--display for price--}}
+                        <div class="form-group">
+                            <label for="exampleInputName1">توضیح بالای فاکتور آگهی</label>
+                            <textarea type="text" class="form-control" name="descriptionTopFactor" placeholder="">{{ $ticket->descriptionTopFactor }}</textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleInputName1">توضیح پایین فاکتور آگهی</label>
+                            <textarea type="text" class="form-control" name="descriptionBottomFactor" placeholder="">{{ $ticket->descriptionBottomFactor }}</textarea>
+                        </div>
 
                         <div class="form-group">
                             <label for="exampleInputPassword4">قیمت نقدی</label>

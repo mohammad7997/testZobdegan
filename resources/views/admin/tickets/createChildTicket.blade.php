@@ -66,6 +66,16 @@
                     <div id="price" style="display: block">  {{--display for price--}}
 
                         <div class="form-group">
+                            <label for="exampleInputName1">توضیح بالای فاکتور آگهی</label>
+                            <textarea type="text" class="form-control" name="descriptionTopFactor" placeholder=""></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleInputName1">توضیح پایین فاکتور آگهی</label>
+                            <textarea type="text" class="form-control" name="descriptionBottomFactor" placeholder=""></textarea>
+                        </div>
+
+                        <div class="form-group">
                             <label for="exampleInputPassword4">قیمت نقدی</label>
                             <input type="text" class="form-control" id="exampleInputPassword4" name="priceCash">
                         </div>

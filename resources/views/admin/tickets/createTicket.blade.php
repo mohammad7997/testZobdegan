@@ -35,6 +35,8 @@
                         <label for="exampleInputName1">نام آگهی</label>
                         <input type="text" class="form-control" name="title" placeholder="title">
                     </div>
+
+
                     <div class="form-group">
                         <label for="exampleInputName1">ویژگی های آگهی</label>
                         <input id="propertyInfo" type="text" class="form-control" placeholder="property">
@@ -62,6 +64,17 @@
 
 
                     <div id="price" style="display: none">  {{--display for price--}}
+
+
+                        <div class="form-group">
+                            <label for="exampleInputName1">توضیح بالای فاکتور آگهی</label>
+                            <textarea type="text" class="form-control" name="descriptionTopFactor" placeholder=""></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleInputName1">توضیح پایین فاکتور آگهی</label>
+                            <textarea type="text" class="form-control" name="descriptionBottomFactor" placeholder=""></textarea>
+                        </div>
 
                         <div class="form-group">
                             <label for="exampleInputPassword4">قیمت نقدی</label>

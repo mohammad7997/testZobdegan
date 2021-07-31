@@ -20,6 +20,8 @@ class CreateTicketsTable extends Migration
             $table->text('property')->nullable();//serialize of property
             $table->text('description');
             $table->tinyInteger('type');
+            $table->text('descriptionTopFactor');
+            $table->text('descriptionBottomFactor');
             $table->Integer('parent')->default(0);
             $table->Integer('priceCash')->nullable();//Price for cash payment
             $table->Integer('priceInstallment')->nullable();//Price for installment payment

@@ -16,13 +16,17 @@ class TicketSeeder extends Seeder
      */
     public function run()
     {
-        for ($i = 0; $i < 3; $i++) {
+        for ($i = 0; $i < 4; $i++) {
             $parentTicket = Ticket::factory()->create();//parent ticket
             if ($parentTicket->type == 1) {
                 for ($c = 0; $c < 2; $c++) {
                     $childTicket = Ticket::factory()->create([
                         'type' => 0,
-                        'parent' => $parentTicket
+                        'parent' => $parentTicket,
+                        'priceCash'=>5000,
+                        'priceInstallment'=>10000,
+                        'descriptionTopFactor'=>$this->faker->text(150),
+                        'descriptionBottomFactor'=>$this->faker->text(150)
                     ]);
                     InstallmentFeature::factory()->create([
                         'ticket_id' => $childTicket->id
@@ -33,6 +37,12 @@ class TicketSeeder extends Seeder
                     'ticket_id' => $parentTicket->id
                 ]);
             }
+            $parentTicket->update([
+                'priceCash'=>5000,
+                'priceInstallment'=>10000,
+                'descriptionTopFactor'=>$this->faker->text(150),
+                'descriptionBottomFactor'=>$this->faker->text(150)
+            ]);
         }
     }
 }

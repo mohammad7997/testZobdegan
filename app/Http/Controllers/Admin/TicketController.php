@@ -90,6 +90,8 @@ class TicketController extends Controller
                 'priceInstallment' => 'required| max:20',
                 'installmentTime' => 'required',
                 'installmentNum' => 'required',
+                'descriptionTopFactor' => 'required',
+                'descriptionBottomFactor' => 'required',
             ], $messag);
         }
 

@@ -33,8 +33,10 @@ class TicketFactory extends Factory
             'description'=>$this->faker->text(100),
             'type'=>rand(0,1),
             'parent'=>0,
-            'priceCash'=>5000,
-            'priceInstallment'=>10000
+            'priceCash'=>null,
+            'priceInstallment'=>null,
+            'descriptionTopFactor'=>null,
+            'descriptionBottomFactor'=>null,
         ];
     }
 }
