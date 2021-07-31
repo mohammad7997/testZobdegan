@@ -37,9 +37,11 @@
                         <div class="col-8 right">
                             <div style="float: left;margin: 5px 10px">
                                 <span style="float: left ;margin: 0 5px "> ویزگی ها : </span>
-                                @foreach(unserialize($ticket->property) as $property)
-                                    {{ $property }},
-                                @endforeach
+                                @if(unserialize($ticket->property) != '' )
+                                    @foreach(unserialize($ticket->property) as $property)
+                                        {{ $property }},
+                                    @endforeach
+                                @endif
                             </div>
 
                             <div style="float: left;margin: 5px 10px">
@@ -63,9 +65,11 @@
                                 <div class="col-8 right" style="float: right">
                                     <div style="float: left;margin: 5px 10px">
                                         <span style="float: left ;margin: 0 5px "> ویزگی ها : </span>
-                                        @foreach(unserialize($childTicket->property) as $property)
-                                            {{ $property }},
-                                        @endforeach
+                                        @if($childTicket->property != null)
+                                            @foreach(unserialize($childTicket->property) as $property)
+                                                {{ $property }},
+                                            @endforeach
+                                        @endif
                                     </div>
 
                                     <div style="float: left;margin: 5px 10px">
@@ -136,9 +140,11 @@
                         <div class="col-8 right" style="float: right">
                             <div style="float: left;margin: 5px 10px">
                                 <span style="float: left ;margin: 0 5px "> ویزگی ها : </span>
-                                @foreach(unserialize($ticket->property) as $property)
-                                    {{ $property }},
-                                @endforeach
+                                @if(unserialize($ticket->property) != '')
+                                    @foreach(unserialize($ticket->property) as $property)
+                                        {{ $property }},
+                                    @endforeach
+                                @endif
                             </div>
 
                             <div style="float: left;margin: 5px 10px">

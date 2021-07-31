@@ -12,6 +12,7 @@ use \Illuminate\Contracts\View\Factory;
 use \Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Mpdf\Mpdf;
 
 
 class OrderController extends Controller
@@ -99,5 +100,20 @@ class OrderController extends Controller
         }
         //dd($userInfo);
         return view('client.factor', compact(['order','pay','ticketInfo','userInfo','payMethod']));
+    }
+
+    public function PDF(Order $order)
+    {
+        $html=$this->factor($order);
+        /*$mpdf = new Mpdf();
+        $html = view('client.factor');
+        $mpdf->WriteHTML(' سلام ');
+        $mpdf->Output()*/;
+        $mpdf = new Mpdf([
+            'mode' => 'utf-8',
+            'orientation' => 'P',
+        ]);
+        $mpdf->WriteHTML($html);
+        $mpdf->Output();
     }
 }

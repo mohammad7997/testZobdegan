@@ -29,6 +29,7 @@ Route::prefix('order/')->middleware(['auth','CheckRoleUser'])->name('Order.')->g
     Route::post('/store/{ticket}', [OrderController::class, 'store'])->name('store');
     Route::get('verify', [OrderController::class, 'verify'])->name('verify');
     Route::get('factor/{order}', [OrderController::class, 'factor'])->name('factor');
+    Route::get('Pdf/{order}', [OrderController::class, 'PDF'])->name('Pdf');
 });
 
 Route::prefix('panel/')->middleware(['auth','CheckRoleUser'])->name('Panel.')->group(function () {

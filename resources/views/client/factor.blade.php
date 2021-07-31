@@ -57,13 +57,10 @@
             <tr>
 
                 <td>
-
-
                     <span> نام کالا : {{ $ticketInfo->title }} </span>
                     <span> قیمت کل : {{ $order->totalAmount }} </span>
                     <span> مبلغ پرداختی : {{ $pay }} </span>
                     <span> نوع خرید : {{ $payMethod }} </span>
-
                 </td>
             </tr>
             <tr>
@@ -74,6 +71,7 @@
             </tbody>
         </table>
     </div>
+    <a class="btn btn-success" href="{{ route('Order.Pdf',$order->id) }}"> PDF </a>
 </div>
 </body>
 </html>
