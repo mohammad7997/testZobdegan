@@ -25,22 +25,25 @@ class TicketSeeder extends Seeder
                         'parent' => $parentTicket,
                         'priceCash'=>5000,
                         'priceInstallment'=>10000,
+                        'descriptionTopFactor'=>'toppppppppppppppppppppppppppp',
+                        'descriptionBottomFactor'=>'bottommmmmmmmmmmmmmmmmmmmmmm'
                     ]);
                     InstallmentFeature::factory()->create([
                         'ticket_id' => $childTicket->id
                     ]);
                 }
             }else{
+                $parentTicket->update([
+                    'priceCash'=>5000,
+                    'priceInstallment'=>10000,
+                    'descriptionTopFactor'=>'toppppppppppppppppppppppppppp',
+                    'descriptionBottomFactor'=>'bottommmmmmmmmmmmmmmmmmmmmmm'
+                ]);
                 InstallmentFeature::factory()->create([
                     'ticket_id' => $parentTicket->id
                 ]);
             }
-            $parentTicket->update([
-                'priceCash'=>5000,
-                'priceInstallment'=>10000,
-                'descriptionTopFactor'=>'toppppppppppppppppppppppppppp',
-                'descriptionBottomFactor'=>'bottommmmmmmmmmmmmmmmmmmmmmm'
-            ]);
+
         }
     }
 }
