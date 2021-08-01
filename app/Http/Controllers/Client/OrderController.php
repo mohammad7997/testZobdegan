@@ -81,6 +81,11 @@ class OrderController extends Controller
         }
     }
 
+    /**
+     * create actor for user after buy
+     * @param Order $order
+     * @return Factory|View
+     */
     public function factor(Order $order)
     {
         $ticketInfo=unserialize($order->ticketInfo);
@@ -98,23 +103,26 @@ class OrderController extends Controller
             $pay=$order->installmentPay()->first()->prepayment;
             $payMethod='اقساطی';
         }
-        //dd($userInfo);
+
         return view('client.factor', compact(['order','pay','ticketInfo','userInfo','payMethod']));
     }
 
+
+    /**
+     * generate PDF of factor
+     * @param Order $order
+     * @throws \Mpdf\MpdfException
+     */
     public function PDF(Order $order)
     {
-        $html=$this->factor($order);
-        /*$mpdf = new Mpdf();
-        $html = view('client.factor');
-        $mpdf->WriteHTML(' سلام ');
-        $mpdf->Output()*/;
+        $htmlView=$this->factor($order);
+
         $mpdf = new Mpdf([
             'mode' => 'utf-8',
             'orientation' => 'P',
         ]);
         $mpdf->SetDefaultFont('BMitra');
-        $mpdf->WriteHTML($html);
+        $mpdf->WriteHTML($htmlView);
         $mpdf->Output();
     }
 }

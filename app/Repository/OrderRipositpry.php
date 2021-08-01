@@ -14,6 +14,9 @@ class OrderRipositpry
 {
     public $authority;
 
+    /**
+     * @param $amount
+     */
     public function getAuthority($amount)
     {
         $results = Zarinpal::request(
@@ -27,11 +30,22 @@ class OrderRipositpry
         $this->authority = $results['Authority'];
     }
 
+    /**
+     *redirect to zarinpal
+     */
     public function zarinpal()
     {
         Zarinpal::redirect(); // redirect users to zarinpal
     }
 
+    /**
+     * create order and redirect to zarinpal
+     * @param $totalAmount
+     * @param $userInfo
+     * @param $ticketInfo
+     * @param $payMethod
+     * @param Ticket $ticket
+     */
     public function createOrder($totalAmount, $userInfo, $ticketInfo, $payMethod, Ticket $ticket)
     {
         $amount = $ticket->payMethod == 0 ? $ticket->InstallmentFeature()->first()->prepayment : $ticket->priceCash;
