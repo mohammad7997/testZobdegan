@@ -16,8 +16,8 @@ class CheckRoleUser
      */
     public function handle(Request $request, Closure $next)
     {
-        if (auth()->check() && auth()->user()->role == 2 ) {
-            if ( auth()->user()->status == 1) {
+        if (auth()->check()) {
+                if ( auth()->user()->status == 1) {
                 return $next($request);
             }
             return redirect(route('index'))->with('failed','شما بلاک شده اید');
