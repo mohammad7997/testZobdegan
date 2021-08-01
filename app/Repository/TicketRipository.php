@@ -138,6 +138,13 @@ class TicketRipository
                 $urlImage = $this->uploadImage($request->file('image'));
             }
 
+            // delete child ticket
+            if ($request->input('type') == 0){
+                if (Ticket::where('parent',$ticket->id)->count() > 0) {
+                    Ticket::where('parent', $ticket->id)->delete();
+                }
+            }
+
             // update ticket
             $ticket->update([
                 'title' => $request->input('title'),
@@ -149,11 +156,14 @@ class TicketRipository
                 'priceInstallment' => $request->input('priceInstallment'),
             ]);
 
+
             // delete Installment Feature when change type ticket to group
             $InstallmentFeatureCount = $ticket->InstallmentFeature()->count();
             if ($InstallmentFeatureCount > 0) {
                 $ticket->InstallmentFeature()->delete();
-            }
+            };
+
+
 
             return true;
         } catch (\Exception $e) {
@@ -180,9 +190,16 @@ class TicketRipository
                 $urlImage = $this->uploadImage($request->file('image'));
             }
 
-            // update ticket
 
-            //dd($request);
+            // delete child ticket
+            if ($request->input('type') == 0){
+                if (Ticket::where('parent',$ticket->id)->count() > 0) {
+                    Ticket::where('parent', $ticket->id)->delete();
+                }
+            }
+
+
+            // update ticket
             $ticket->update([
                 'title' => $request->input('title'),
                 'property' => $request->input('property') != null ? serialize($request->input('property')) : null,
