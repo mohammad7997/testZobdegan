@@ -22,13 +22,12 @@ class TicketFactory extends Factory
      */
     public function definition()
     {
-        /*
-        $image=$this->faker->image;
-        Storage::disk('public')->putFileAs('',$image,$image);
-        $urlImage=Storage::url($image);*/
+
+        //Storage::url('test.jpg');
+        $urlImage=Storage::url('test.jpg');
         return [
             'title'=>$this->faker->title,
-            'image'=>$this->faker->imageUrl,
+            'image'=>$urlImage,
             'property'=>serialize(['test'=>'test']),
             'description'=>$this->faker->text(100),
             'type'=>rand(0,1),
